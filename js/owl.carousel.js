@@ -3,6 +3,7 @@
  * Copyright 2013-2017 David Deutsch
  * Licensed under  ()
  */
+capacity = 0;
 /**
  * Owl carousel
  * @version 2.1.6
@@ -1237,6 +1238,7 @@
 	 * @param {Number} [speed] - The time in milliseconds for the transition.
 	 */
 	Owl.prototype.prev = function(speed) {
+		console.log('bra');
 		speed = speed || false;
 		this.to(this.relative(this.current()) - 1, speed);
 	};
@@ -1669,7 +1671,7 @@
 				$this.data('owl.carousel', data);
 
 				$.each([
-					'next', 'prev', 'to', 'destroy', 'refresh', 'replace', 'add', 'remove'
+					'next', 'prev', 'first', 'last', 'to', 'destroy', 'refresh', 'replace', 'add', 'remove'
 				], function(i, event) {
 					data.register({ type: Owl.Type.Event, name: event });
 					data.$element.on(event + '.owl.carousel.core', $.proxy(function(e) {
@@ -2813,12 +2815,12 @@
 	 */
 	Navigation.Defaults = {
 		nav: false,
-		navText: [ 'prev', 'next' ],
+		navText: [ 'prev', 'next', 'first', 'last' ],
 		navSpeed: false,
 		navElement: 'div',
 		navContainer: false,
 		navContainerClass: 'owl-nav',
-		navClass: [ 'owl-prev', 'owl-next' ],
+		navClass: [ 'owl-prev', 'owl-next', 'owl-first', 'owl-last' ],
 		slideBy: 1,
 		dotClass: 'owl-dot',
 		dotsClass: 'owl-dots',
@@ -2855,6 +2857,21 @@
 			.on('click', $.proxy(function(e) {
 				this.next(settings.navSpeed);
 			}, this));
+        this._controls.$first = $('<' + settings.navElement + '>')
+            .addClass(settings.navClass[2])
+            .html(settings.navText[2])
+            .prependTo(this._controls.$relative)
+            .on('click', $.proxy(function(e) {
+                this.to(0, settings.navSpeed, true);
+            }, this));
+        this._controls.$last = $('<' + settings.navElement + '>')
+            .addClass(settings.navClass[3])
+            .html(settings.navText[3])
+            .appendTo(this._controls.$relative)
+            .on('click', $.proxy(function(e) {
+            	var index = e.currentTarget.parentNode.previousSibling.childNodes.item(0).childNodes.length - 1;
+                this.to(index, settings.navSpeed, true);
+            }, this));
 
 		// create DOM structure for absolute navigation
 		if (!settings.dotsData) {
