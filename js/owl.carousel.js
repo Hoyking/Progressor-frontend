@@ -2862,7 +2862,7 @@ capacity = 0;
             .html(settings.navText[2])
             .prependTo(this._controls.$relative)
             .on('click', $.proxy(function(e) {
-                this.to(0, settings.navSpeed, true);
+                this.to(0, 150, true);
             }, this));
         this._controls.$last = $('<' + settings.navElement + '>')
             .addClass(settings.navClass[3])
@@ -2870,7 +2870,7 @@ capacity = 0;
             .appendTo(this._controls.$relative)
             .on('click', $.proxy(function(e) {
             	var index = e.currentTarget.parentNode.previousSibling.childNodes.item(0).childNodes.length - 1;
-                this.to(index, settings.navSpeed, true);
+                this.to(index, 150, true);
             }, this));
 
 		// create DOM structure for absolute navigation

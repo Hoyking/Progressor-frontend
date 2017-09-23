@@ -9,12 +9,12 @@ function expand(){
     [].forEach.call(document.getElementsByClassName("workout-day"), function(day) {
         var size = day.getAttribute("size");
         if(size > "5") {
-            var changer = day.getElementsByClassName("workout-day-changer")[0];
+            var changer = day.querySelector(".workout-day-changer");
             changer.classList.add("workout-day-changer-active");
-            var icon = changer.getElementsByClassName("fa")[0];
+            var icon = changer.querySelector(".fa");
             icon.classList.add("fa-angle-down");
             $(changer).click(function() {
-                var workoutList = day.getElementsByClassName("workout-day-wrap")[0].getElementsByClassName("workout-list")[0];
+                var workoutList = day.querySelector(".workout-day-wrap").querySelector(".workout-list");
                 if($(workoutList).css("height") === "115px") {
                     height = 115 + 23 * (size - 5);
                     icon.classList.remove("fa-angle-down");
@@ -46,8 +46,8 @@ function customization() {
 function customizeUpDay(item) {
     item.classList.add("workout-day-up");
 
-    item.getElementsByClassName("workout-day-wrap")[0].getElementsByClassName("workout-day-arrow")[0].
-    getElementsByClassName("workout-arrow-icon")[0].getElementsByClassName("fa")[0].
+    item.querySelector(".workout-day-wrap").querySelector(".workout-day-arrow").
+    querySelector(".workout-arrow-icon").querySelector(".fa").
     classList.add("fa-arrow-circle-o-up");
 
 };
@@ -55,15 +55,15 @@ function customizeUpDay(item) {
 function customizeRepeatDay(item) {
     item.classList.add("workout-day-repeat");
 
-    item.getElementsByClassName("workout-day-wrap")[0].getElementsByClassName("workout-day-arrow")[0].
-    getElementsByClassName("workout-arrow-icon")[0].getElementsByClassName("fa")[0].
+    item.querySelector(".workout-day-wrap").querySelector(".workout-day-arrow").
+    querySelector(".workout-arrow-icon").querySelector(".fa").
     classList.add("fa-repeat");
 };
 
 function customizeDownDay(item) {
     item.classList.add("workout-day-down");
 
-    item.getElementsByClassName("workout-day-wrap")[0].getElementsByClassName("workout-day-arrow")[0].
-    getElementsByClassName("workout-arrow-icon")[0].getElementsByClassName("fa")[0].
+    item.querySelector(".workout-day-wrap").querySelector(".workout-day-arrow").
+    querySelector(".workout-arrow-icon").querySelector(".fa").
     classList.add("fa-arrow-circle-o-down");
 };
